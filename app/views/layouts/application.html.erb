@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SampleApp</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <title>Ruby on Rails Tutorial Sample App | <%= yield(:title) %></title>
+  <!--this pulls in css and js which are part of the asses pipeline-->
+  <%= stylesheet_link_tag    "application", media: "all",
+                             "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <!--cross site forgery prevention stuff-->
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<!--yield inserts the contents of each page into this layout-->
 <%= yield %>
 
 </body>
