@@ -8,10 +8,14 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <!--cross site forgery prevention stuff-->
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
 </head>
-<body>
-<!--yield inserts the contents of each page into this layout-->
-<%= yield %>
-
-</body>
+    <body>
+        <%= render 'layouts/header' %>
+        <!--main content of the page-->
+        <div class="container">
+          <%= yield %>
+          <%= render 'layouts/footer' %>
+        </div>
+    </body>
 </html>
