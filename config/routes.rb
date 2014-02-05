@@ -1,22 +1,28 @@
 SampleApp::Application.routes.draw do
-  get "users/new"
+  resources :users
+
+  # resources :users replaces g
+  # get "users/new" b/c it does the same thing and more
+  #  get "users/new"
+
   #get "static_pages/home"
   #get "static_pages/help"
   #get "static_pages/about"
   #get "static_pages/contact"
-
-  #root creates "named routes" for us
-  # root_path -> '/'
-  # root_url -> 'http://localhouse:3000/'
   root 'static_pages#home'
-  #match creates "named routes" for us
-  # about_path -> '/about'
-  # about_url -> 'http://localhouse:3000/about'
-  # etc...
+
   match '/signup',  to: 'users#new',            via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
+
+  #root creates "named routes" for us
+  # root_path -> '/'
+  # root_url -> 'http://localhouse:3000/'
+  #match creates "named routes" for us
+  # about_path -> '/about'
+  # about_url -> 'http://localhouse:3000/about'
+  # etc...
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
