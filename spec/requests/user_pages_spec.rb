@@ -60,6 +60,8 @@ describe "User pages" do
         let(:user) { User.find_by(email: 'user@example.com') }
 
         # verify that the page has the correct user information
+        # signout link means we successfully signed in. Is it there?
+        it { should have_link('Sign out') }
         # does the name match?
         it { should have_title(user.name) }
         # did the page say success?
