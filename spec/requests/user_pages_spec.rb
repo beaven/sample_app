@@ -65,7 +65,8 @@ describe "User pages" do
         # does the name match?
         it { should have_title(user.name) }
         # did the page say success?
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        # example of how to use a helper function from utilities.rb
+        it { should welcome_page }
       end
     end
   end
