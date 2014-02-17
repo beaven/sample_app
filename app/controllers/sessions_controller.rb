@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
     #if we found the user and the password works...
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      redirect_to user
+      # this is our special function that will remember the originally requested url
+      redirect_back_or user
     else #user not found or invalid password
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'

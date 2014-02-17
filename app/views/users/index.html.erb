@@ -1,0 +1,16 @@
+<!--will_paginate is magical.  It knows we are talking about Users here
+b/c we are in the user view.  It looks for the @users object and generates the
+pagination for Users.  The index action just needs to call User.paginate() to
+get this working.-->
+
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+<!--Rails knows that @user must be a list of User objects.  Rails will automatically
+iterate through the list and render them using the _user.html.erb partial.-->
+<ul class="users">
+    <%= render @users %>
+</ul>
+
+<%= will_paginate %>
