@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,   only: [:destroy]
+  before_action :redirect_signed_in_user, only: [:new, :create]
 
   def index
     # this gets a list of users...in one line...cool
@@ -55,10 +56,21 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    #find and destroy the user
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
-    redirect_to users_url
+    ##find and destroy the user
+    #User.find(params[:id]).destroy
+    #flash[:success] = "User deleted."
+    #redirect_to users_url
+
+    user_to_destroy = User.find(params[:id])
+    ##don't destroy the user if it is the same user making the request
+    if current_user != user_to_destroy
+      #find and destroy the user
+      User.find(params[:id]).destroy
+      flash[:success] = "User deleted."
+      redirect_to users_url
+    else
+      redirect_to root_url
+    end
   end
 
   #================private stuff================
@@ -83,6 +95,7 @@ class UsersController < ApplicationController
       # doesn't work for :success or :error
       redirect_to signin_url, notice: "Please sign in."
     end
+
   end
 
   def correct_user
@@ -92,5 +105,11 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def redirect_signed_in_user
+    if signed_in?
+      redirect_to(root_url)
+    end
   end
 end
